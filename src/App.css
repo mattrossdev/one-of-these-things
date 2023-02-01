@@ -1,0 +1,60 @@
+@keyframes fade-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.app {
+  font-family: "Inter", "Helvetica";
+}
+
+.title {
+  color: black;
+  margin: auto;
+  font-size: 32px;
+}
+
+#gameText {
+  text-align: center;
+}
+
+#gameCounter {
+  font-size: 20px;
+  opacity: 0;
+  animation: fade-in-right ease 0.4s forwards;
+}
+
+#timer {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.center-block {
+  width: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  width: 100%;
+  margin: auto;
+  height: 200px;
+}
+
+.row > img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  --bs-gutter-x: 0;
+}
+
+img[src=""] {
+  display: none;
+}

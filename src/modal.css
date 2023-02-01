@@ -1,0 +1,57 @@
+ @keyframes fadeOut {
+    0% {opacity: 1;}
+    80% {opacity: 1;}
+    100% {opacity: 0;} 
+ } 
+
+*{
+  font-family: "Inter", "Helvetica";
+}
+
+.modal-header{
+ justify-content: center;
+}
+
+.modal-title{
+  width: 100%;
+  text-align: center;
+}
+
+#win-modal-body {
+  text-align: center;
+}
+
+.share-button {
+  margin-top: 0 !important;
+  background-color: #6aaa64;
+  border-radius: 104px; 
+  font-weight: 700;
+  font-size: 16px; 
+  width: 150px;
+  height: 44px;
+  color: #ffffff;
+}
+.share-button > label {
+ padding-right: 20px
+}
+
+
+#copied-message {
+  width: 100% !important;
+  justify-content: center;
+  text-align: center;
+  display: none;
+  animation: fadeOut 2s;
+  animation-fill-mode: forwards;
+ 
+}
+
+#copied-text {
+  display: inline-block;
+  background-color: #0d0d0d	;
+  color: white;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px 0;
+}
