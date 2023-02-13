@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
@@ -9,6 +9,16 @@ export default function HelpModal() {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   return (
     <div className="modal">
@@ -24,8 +34,11 @@ export default function HelpModal() {
         </Modal.Header>
         <Modal.Body>
           {" "}
-          <p>In each level, you'll see 5 pictures of the same animal and one picture of a different animal. The goal of the game is to click the different animal as quickly as possible. </p>
-          <p> Click Ready to start! </p>
+          <p>
+            In each level, you'll see 5 pictures of the same animal and one
+            picture an animal that doesn't belong. The goal of the game is to
+            complete all three levels as quickly as possible.{" "}
+          </p>
         </Modal.Body>
       </Modal>
     </div>
