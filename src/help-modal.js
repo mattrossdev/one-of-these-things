@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
@@ -9,6 +9,16 @@ export default function HelpModal() {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        handleClose();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   return (
     <div className="modal">
