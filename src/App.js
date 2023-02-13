@@ -12,10 +12,13 @@ function App() {
   const [gameCount, setGameCount] = useState(1);
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
-  const [gameTime, setGameTime] = useState(0)
-  const [failed, setFailed] = useState(false)
+  const [gameTime, setGameTime] = useState(0);
+  const [failed, setFailed] = useState(false);
   const [gameWon, setGameWon] = useState(false);
-  const [animalNamePair, setAnimalNamePair] = useState({first: "", second: ""})
+  const [animalNamePair, setAnimalNamePair] = useState({
+    first: "",
+    second: "",
+  });
   const [target, setTarget] = useState("");
   const isMount = useIsMount();
 
@@ -23,62 +26,62 @@ function App() {
     const getRandomAnimal = () => {
       return animalNames[Math.floor(Math.random() * animalNames.length)];
     };
-    var animal1 = getRandomAnimal()
-    
+    var animal1 = getRandomAnimal();
 
     var getMinorityAnimal = () => {
-      var animal2 = getRandomAnimal()
+      var animal2 = getRandomAnimal();
       while (animal1 === animal2) {
-        animal2 = getMinorityAnimal()
+        animal2 = getMinorityAnimal();
       }
-      return(animal2)
-    }
+      return animal2;
+    };
 
-    getMinorityAnimal()
-    setAnimalNamePair({first: animal1, second: getMinorityAnimal()})
-   
-
+    getMinorityAnimal();
+    setAnimalNamePair({ first: animal1, second: getMinorityAnimal() });
   };
 
   const fetchRequest = async () => {
-    console.log(animalNamePair)
-    console.log(animalNamePair[0])
-   
+    console.log(animalNamePair);
+    console.log(animalNamePair[0]);
+
     var imageArray = [];
     var majorityAnimalRequest = await fetch(
-      `https://api.unsplash.com/search/photos?page=1&query=${animalNamePair.first}&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
+      `https://api.unsplash.com/search/photos?page=1&query=${
+        animalNamePair.first
+      }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var majorityAnimalRequestJ = await majorityAnimalRequest.json();
-    console.log(majorityAnimalRequestJ)
+    console.log(majorityAnimalRequestJ);
     var majorityAnimalResult = await majorityAnimalRequestJ.results;
     console.log(majorityAnimalResult);
 
     if (majorityAnimalResult.length < 5) {
-      alert('Error fetching data, please refresh the page')
+      alert("Error fetching data, please refresh the page");
+    } else {
+      for (let i = 0; i < 5; i++) {
+        imageArray.push("" + majorityAnimalResult[i].urls.regular + "");
+      }
     }
-    else{
-    for (let i = 0; i < 5; i++) {
-      imageArray.push("" + majorityAnimalResult[i].urls.regular + "");
-    }}
 
     var minorityAnimalRequest = await fetch(
-      `https://api.unsplash.com/search/photos?page=1&query=${animalNamePair.second}&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
+      `https://api.unsplash.com/search/photos?page=1&query=${
+        animalNamePair.second
+      }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var minorityAnimalRequestJ = await minorityAnimalRequest.json();
-    console.log(minorityAnimalRequestJ)
+    console.log(minorityAnimalRequestJ);
     var minorityAnimalResult = await minorityAnimalRequestJ.results;
     var minorityAnimalImageLink = minorityAnimalResult[0].urls.regular;
 
     if (minorityAnimalResult === null) {
-      alert('Error fetching data, please refresh the page')
+      alert("Error fetching data, please refresh the page");
+    } else {
+      imageArray.push("" + minorityAnimalImageLink + "");
+      setTarget(minorityAnimalImageLink);
+      shuffle(imageArray);
+      setImageLinks(imageArray);
     }
-    else{
-    imageArray.push("" + minorityAnimalImageLink + "");
-    setTarget(minorityAnimalImageLink);
-    shuffle(imageArray);
-    setImageLinks(imageArray)}
   };
-
 
   const startGame = () => {
     for (let i = 0; i < 6; i++) {
@@ -111,9 +114,9 @@ function App() {
 
   useEffect(() => {
     if (!isMount) {
-      setGameReady(true)
+      setGameReady(true);
     }
-  },[imageLinks])
+  }, [imageLinks]);
 
   useEffect(() => {
     document.getElementById("gameCounter").innerHTML =
@@ -121,26 +124,25 @@ function App() {
     /* if (!isMount) {
       fetchRequest();
       setGameReady(true);
-      //setFailed(false); */ 
-      if (gameCount > 3) {
-        console.log("You Win! ")
-        setGameWon(true);
-        setGameCount(1);
-        setGameTime(returnTime())
-        resetTimer()
-      }
-      console.log(gameWon);
+      //setFailed(false); */
+    if (gameCount > 3) {
+      console.log("You Win! ");
+      setGameWon(true);
+      setGameCount(1);
+      setGameTime(returnTime());
+      resetTimer();
+    }
+    console.log(gameWon);
   }, [gameCount, failed]);
 
-
   const determineSuccess = (e) => {
-    console.log(gameTime)
+    console.log(gameTime);
     stopTimer();
     if (e.target.src == target) {
       setGameCount(gameCount + 1);
     } else {
-      setGameCount(1)
-      setFailed(true)
+      setGameCount(1);
+      setFailed(true);
       alert("incorrect");
       resetTimer();
     }
@@ -151,9 +153,7 @@ function App() {
   return (
     <div className="app">
       <HelpModal />
-      {gameWon && <WinModal 
-      time = {gameTime}
-      />}
+      {gameWon && <WinModal time={gameTime} />}
       <div className="component">
         <div id="gameText">
           <h1 className="title">One of These Things</h1>

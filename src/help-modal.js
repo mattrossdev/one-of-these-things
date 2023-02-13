@@ -24,8 +24,11 @@ export default function HelpModal() {
         </Modal.Header>
         <Modal.Body>
           {" "}
-          <p>In each level, you'll see 5 pictures of the same animal and one picture of a different animal. The goal of the game is to click the different animal as quickly as possible. </p>
-          <p> Click Ready to start! </p>
+          <p>
+            In each level, you'll see 5 pictures of the same animal and one
+            picture an animal that doesn't belong. The goal of the game is to
+            complete all three levels as quickly as possible.{" "}
+          </p>
         </Modal.Body>
       </Modal>
     </div>
