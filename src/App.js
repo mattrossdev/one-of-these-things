@@ -6,7 +6,6 @@ import { useIsMount } from "./utils.js";
 import { startTimer, stopTimer, resetTimer, returnTime } from "./stopwatch.js";
 import HelpModal from "./help-modal.js";
 import WinModal from "./win-modal.js";
-import Modal from "react-bootstrap/Modal";
 
 function App() {
   const [gameCount, setGameCount] = useState(1);
@@ -41,9 +40,6 @@ function App() {
   };
 
   const fetchRequest = async () => {
-    console.log(animalNamePair);
-    console.log(animalNamePair[0]);
-
     var imageArray = [];
     var majorityAnimalRequest = await fetch(
       `https://api.unsplash.com/search/photos?page=1&query=${
@@ -51,9 +47,7 @@ function App() {
       }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var majorityAnimalRequestJ = await majorityAnimalRequest.json();
-    console.log(majorityAnimalRequestJ);
     var majorityAnimalResult = await majorityAnimalRequestJ.results;
-    console.log(majorityAnimalResult);
 
     if (majorityAnimalResult.length < 5) {
       alert("Error fetching data, please refresh the page");
@@ -69,7 +63,6 @@ function App() {
       }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var minorityAnimalRequestJ = await minorityAnimalRequest.json();
-    console.log(minorityAnimalRequestJ);
     var minorityAnimalResult = await minorityAnimalRequestJ.results;
     var minorityAnimalImageLink = minorityAnimalResult[0].urls.regular;
 
@@ -85,8 +78,7 @@ function App() {
 
   const startGame = () => {
     for (let i = 0; i < 6; i++) {
-      document.getElementById("image" + "" + i + "").src =
-        "" + imageLinks[i] + "";
+      document.getElementById("image" + i).src = "" + imageLinks[i] + "";
     }
     setGameReady(false);
     setGameWon(false);
@@ -121,24 +113,17 @@ function App() {
   useEffect(() => {
     document.getElementById("gameCounter").innerHTML =
       "Level:  " + gameCount + " / 3";
-    /* if (!isMount) {
-      fetchRequest();
-      setGameReady(true);
-      //setFailed(false); */
     if (gameCount > 3) {
-      console.log("You Win! ");
       setGameWon(true);
       setGameCount(1);
       setGameTime(returnTime());
       resetTimer();
     }
-    console.log(gameWon);
   }, [gameCount, failed]);
 
   const determineSuccess = (e) => {
-    console.log(gameTime);
     stopTimer();
-    if (e.target.src == target) {
+    if (e.target.src === target) {
       setGameCount(gameCount + 1);
     } else {
       setGameCount(1);

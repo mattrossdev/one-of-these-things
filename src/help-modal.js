@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalHeader from "react-bootstrap/ModalHeader";
 import "./modal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
