@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import "./modal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function HelpModal() {
+export default function HelpModal(props) {
   const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,14 +20,14 @@ export default function HelpModal() {
 
   return (
     <div className="modal">
-      <Modal show={show}>
+      <Modal show={props.show}>
         <Modal.Header>
           <Modal.Title> How to Play</Modal.Title>
           <button
             type="button"
             className="btn-close"
             aria-label="Close"
-            onClick={handleClose}
+            onClick={props.handleClose}
           ></button>
         </Modal.Header>
         <Modal.Body>

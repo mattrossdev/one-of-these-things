@@ -9,7 +9,7 @@
   }
 }
 
-.app {
+* {
   font-family: "Inter", "Helvetica";
 }
 
@@ -17,6 +17,24 @@
   color: black;
   margin: auto;
   font-size: 32px;
+  text-align: center;
+}
+
+.topnav {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  height: 40px;
+}
+
+#help-button {
+  border: none;
+  background-color: #ffffff;
+}
+
+#help-button > img {
+  height: 40px;
+  background-color: #ffffff;
 }
 
 #gameText {

@@ -4,10 +4,12 @@ import { animalNames } from "./data.js";
 import { shuffle } from "./utils.js";
 import { useIsMount } from "./utils.js";
 import { startTimer, stopTimer, resetTimer, returnTime } from "./stopwatch.js";
+import TopNav from "./top-nav.js";
 import HelpModal from "./help-modal.js";
 import WinModal from "./win-modal.js";
 
 function App() {
+  const [showHelpModal, setShowHelpModal] = useState(true);
   const [gameCount, setGameCount] = useState(1);
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
@@ -20,6 +22,25 @@ function App() {
   });
   const [target, setTarget] = useState("");
   const isMount = useIsMount();
+
+  const handleHelpModalShow = () => {
+    setShowHelpModal(true);
+    console.log(showHelpModal);
+  };
+
+  const handleHelpModalHide = () => {
+    setShowHelpModal(false);
+  };
+
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        handleHelpModalHide();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   const getNames = () => {
     const getRandomAnimal = () => {
@@ -137,11 +158,11 @@ function App() {
 
   return (
     <div className="app">
-      <HelpModal />
+      <TopNav showModal={handleHelpModalShow} />
+      <HelpModal show={showHelpModal} handleClose={handleHelpModalHide} />
       {gameWon && <WinModal time={gameTime} />}
       <div className="component">
         <div id="gameText">
-          <h1 className="title">One of These Things</h1>
           <div id="gameCounter"></div>
           <button className="button" onClick={startGame} disabled={!gameReady}>
             {" "}
