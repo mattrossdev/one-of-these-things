@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
-import "./modal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 export default function HelpModal(props) {
   const [show, setShow] = useState(true);
@@ -26,6 +26,7 @@ export default function HelpModal(props) {
           <button
             type="button"
             className="btn-close"
+            id="btn-close"
             aria-label="Close"
             onClick={props.handleClose}
           ></button>

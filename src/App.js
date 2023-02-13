@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import { animalNames } from "./data.js";
 import { shuffle } from "./utils.js";
 import { useIsMount } from "./utils.js";
@@ -7,8 +6,10 @@ import { startTimer, stopTimer, resetTimer, returnTime } from "./stopwatch.js";
 import TopNav from "./top-nav.js";
 import HelpModal from "./help-modal.js";
 import WinModal from "./win-modal.js";
+import "./App.css";
 
 function App() {
+  const [theme, setTheme] = useState("light");
   const [showHelpModal, setShowHelpModal] = useState(true);
   const [gameCount, setGameCount] = useState(1);
   const [imageLinks, setImageLinks] = useState([]);
@@ -156,9 +157,23 @@ function App() {
     getNames();
   };
 
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+      document.getElementbyId("btn-close").className = "btn-close-white";
+    } else {
+      setTheme("light");
+      document.getElementbyId("btn-close").className = "btn-close";
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <div className="app">
-      <TopNav showModal={handleHelpModalShow} />
+      <TopNav showModal={handleHelpModalShow} toggleTheme={toggleTheme} />
       <HelpModal show={showHelpModal} handleClose={handleHelpModalHide} />
       {gameWon && <WinModal time={gameTime} />}
       <div className="component">

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalBody from "react-bootstrap/ModalBody";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./modal.css";
+import "./App.css";
 
 export default function WinModal(props) {
   const [open, setOpen] = useState(true);
@@ -39,6 +39,7 @@ export default function WinModal(props) {
           <button
             type="button"
             className="btn-close"
+            id="btn-close"
             aria-label="Close"
             onClick={handleClose}
           ></button>
