@@ -1,14 +1,16 @@
 import { useState, useEffect } from "react";
-import "./App.css";
 import { animalNames } from "./data.js";
 import { shuffle } from "./utils.js";
 import { useIsMount } from "./utils.js";
 import { startTimer, stopTimer, resetTimer, returnTime } from "./stopwatch.js";
+import TopNav from "./top-nav.js";
 import HelpModal from "./help-modal.js";
 import WinModal from "./win-modal.js";
-import Modal from "react-bootstrap/Modal";
+import "./App.css";
 
 function App() {
+  const [theme, setTheme] = useState("light");
+  const [showHelpModal, setShowHelpModal] = useState(true);
   const [gameCount, setGameCount] = useState(1);
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
@@ -21,6 +23,25 @@ function App() {
   });
   const [target, setTarget] = useState("");
   const isMount = useIsMount();
+
+  const handleHelpModalShow = () => {
+    setShowHelpModal(true);
+    console.log(showHelpModal);
+  };
+
+  const handleHelpModalHide = () => {
+    setShowHelpModal(false);
+  };
+
+  useEffect(() => {
+    const close = (e) => {
+      if (e.keyCode === 27) {
+        handleHelpModalHide();
+      }
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, []);
 
   const getNames = () => {
     const getRandomAnimal = () => {
@@ -41,9 +62,6 @@ function App() {
   };
 
   const fetchRequest = async () => {
-    console.log(animalNamePair);
-    console.log(animalNamePair[0]);
-
     var imageArray = [];
     var majorityAnimalRequest = await fetch(
       `https://api.unsplash.com/search/photos?page=1&query=${
@@ -51,9 +69,7 @@ function App() {
       }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var majorityAnimalRequestJ = await majorityAnimalRequest.json();
-    console.log(majorityAnimalRequestJ);
     var majorityAnimalResult = await majorityAnimalRequestJ.results;
-    console.log(majorityAnimalResult);
 
     if (majorityAnimalResult.length < 5) {
       alert("Error fetching data, please refresh the page");
@@ -69,7 +85,6 @@ function App() {
       }&orientation=landscape&client_id=${"HSHyd3uB_pmCjDlMXp7ZN4d5Jd-DtI8vEN-jBopzTPE"}&per_page=10`
     );
     var minorityAnimalRequestJ = await minorityAnimalRequest.json();
-    console.log(minorityAnimalRequestJ);
     var minorityAnimalResult = await minorityAnimalRequestJ.results;
     var minorityAnimalImageLink = minorityAnimalResult[0].urls.regular;
 
@@ -85,8 +100,7 @@ function App() {
 
   const startGame = () => {
     for (let i = 0; i < 6; i++) {
-      document.getElementById("image" + "" + i + "").src =
-        "" + imageLinks[i] + "";
+      document.getElementById("image" + i).src = "" + imageLinks[i] + "";
     }
     setGameReady(false);
     setGameWon(false);
@@ -121,24 +135,17 @@ function App() {
   useEffect(() => {
     document.getElementById("gameCounter").innerHTML =
       "Level:  " + gameCount + " / 3";
-    /* if (!isMount) {
-      fetchRequest();
-      setGameReady(true);
-      //setFailed(false); */
     if (gameCount > 3) {
-      console.log("You Win! ");
       setGameWon(true);
       setGameCount(1);
       setGameTime(returnTime());
       resetTimer();
     }
-    console.log(gameWon);
   }, [gameCount, failed]);
 
   const determineSuccess = (e) => {
-    console.log(gameTime);
     stopTimer();
-    if (e.target.src == target) {
+    if (e.target.src === target) {
       setGameCount(gameCount + 1);
     } else {
       setGameCount(1);
@@ -150,13 +157,27 @@ function App() {
     getNames();
   };
 
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+      document.getElementbyId("btn-close").className = "btn-close-white";
+    } else {
+      setTheme("light");
+      document.getElementbyId("btn-close").className = "btn-close";
+    }
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <div className="app">
-      <HelpModal />
+      <TopNav showModal={handleHelpModalShow} toggleTheme={toggleTheme} />
+      <HelpModal show={showHelpModal} handleClose={handleHelpModalHide} />
       {gameWon && <WinModal time={gameTime} />}
       <div className="component">
         <div id="gameText">
-          <h1 className="title">One of These Things</h1>
           <div id="gameCounter"></div>
           <button className="button" onClick={startGame} disabled={!gameReady}>
             {" "}

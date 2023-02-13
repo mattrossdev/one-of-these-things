@@ -9,14 +9,56 @@
   }
 }
 
-.app {
+:root {
+  color: #333;
+  --background-color: #fffff;
+  --modal-color: #ffffff;
+  --btn-close-color: #ffffff;
+  --modal-background-color: #ffffff;
+}
+
+[data-theme="dark"] {
+  --color: #ffffff;
+  --background-color: #121212;
+  --modal-background-color: #1a1a1b;
+  --btn-close-color: #ffffff;
+}
+
+body {
+  background-color: var(--background-color) !important;
+  color: var(--color) !important;
+}
+
+* {
   font-family: "Inter", "Helvetica";
 }
 
 .title {
-  color: black;
   margin: auto;
   font-size: 32px;
+  text-align: center;
+}
+
+.topnav {
+  display: flex;
+  flex-direction: row;
+  padding: 0px;
+  height: 40px;
+}
+
+.topnav > button {
+  border: none;
+  background-color: #ffffff;
+}
+
+.navicons > button {
+  border: none;
+  background-color: #ffffff;
+}
+
+.navicons > button > img {
+  height: 40px;
+  background-color: #ffffff;
 }
 
 #gameText {
@@ -57,4 +99,74 @@
 
 img[src=""] {
   display: none;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+* {
+  font-family: "Inter", "Helvetica";
+}
+
+.modal-header {
+  justify-content: center;
+}
+
+.modal-title {
+  width: 100%;
+  text-align: center;
+}
+
+#win-modal-body {
+  text-align: center;
+}
+
+.share-button {
+  margin-top: 0 !important;
+  background-color: #6aaa64;
+  border-radius: 104px;
+  font-weight: 700;
+  font-size: 16px;
+  width: 150px;
+  height: 44px;
+  color: #ffffff;
+}
+.share-button > label {
+  padding-right: 20px;
+}
+
+#copied-message {
+  width: 100% !important;
+  justify-content: center;
+  text-align: center;
+  display: none;
+  animation: fadeOut 2s;
+  animation-fill-mode: forwards;
+}
+
+#copied-text {
+  display: inline-block;
+  background-color: #0d0d0d;
+  color: white;
+  width: 250px;
+  height: 40px;
+  border-radius: 5px;
+  padding: 10px 0;
+}
+
+.modal-content {
+  background-color: var(--modal-background-color) !important;
+}
+
+.btn-close {
+  background-color: var(--btn-close-color) !important;
 }
