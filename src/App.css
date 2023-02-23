@@ -9,6 +9,20 @@
   }
 }
 
+@media (min-width: 0px) {
+  :root {
+    --header-text-size: 24px;
+    --header-text-align: left;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --header-text-size: 30px;
+    --header-text-align: center;
+  }
+}
+
 :root {
   color: #333;
   --background-color: #fffff;
@@ -49,9 +63,9 @@ body {
 }
 
 .title {
-  font-size: 28px;
+  font-size: var(--header-text-size);
   flex-grow: 2;
-  text-align: center;
+  text-align: var(--header-text-align);
   margin-left: 10%;
 }
 
@@ -65,6 +79,7 @@ body {
 .navicons {
   display: flex;
   width: 10%;
+  justify-content: flex-end;
 }
 
 .navicons > button {
