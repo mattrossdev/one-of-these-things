@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/one-of-these-things/static/css/main.0521f809.css",
-    "main.js": "/one-of-these-things/static/js/main.12f07afa.js",
+    "main.css": "/one-of-these-things/static/css/main.f836bc6d.css",
+    "main.js": "/one-of-these-things/static/js/main.1de87e7a.js",
     "static/js/787.d24f4939.chunk.js": "/one-of-these-things/static/js/787.d24f4939.chunk.js",
     "static/media/darkmode.png": "/one-of-these-things/static/media/darkmode.3239c8c22dc37d7337d2.png",
     "static/media/question.png": "/one-of-these-things/static/media/question.38dc43171b5040345a00.png",
     "index.html": "/one-of-these-things/index.html",
-    "main.0521f809.css.map": "/one-of-these-things/static/css/main.0521f809.css.map",
-    "main.12f07afa.js.map": "/one-of-these-things/static/js/main.12f07afa.js.map",
+    "main.f836bc6d.css.map": "/one-of-these-things/static/css/main.f836bc6d.css.map",
+    "main.1de87e7a.js.map": "/one-of-these-things/static/js/main.1de87e7a.js.map",
     "787.d24f4939.chunk.js.map": "/one-of-these-things/static/js/787.d24f4939.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0521f809.css",
-    "static/js/main.12f07afa.js"
+    "static/css/main.f836bc6d.css",
+    "static/js/main.1de87e7a.js"
   ]
 }
