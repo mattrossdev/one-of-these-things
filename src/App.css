@@ -33,32 +33,47 @@ body {
   font-family: "Inter", "Helvetica";
 }
 
-.title {
-  margin: auto;
-  font-size: 32px;
+.topnav {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0px;
+  height: 40px;
   text-align: center;
 }
 
-.topnav {
-  display: flex;
-  flex-direction: row;
-  padding: 0px;
-  height: 40px;
+.title {
+  font-size: 28px;
+  flex-grow: 2;
+  text-align: center;
+  margin-left: 10%;
 }
 
 .topnav > button {
   border: none;
   background-color: #ffffff;
+  display: flex;
+  float: right;
+}
+
+.navicons {
+  display: flex;
+  width: 10%;
 }
 
 .navicons > button {
   border: none;
   background-color: #ffffff;
+  display: flex;
 }
 
 .navicons > button > img {
-  height: 40px;
+  height: 30px;
   background-color: #ffffff;
+  display: flex;
 }
 
 #gameText {
@@ -78,7 +93,8 @@ body {
 }
 
 .center-block {
-  width: 50%;
+  width: 100%;
+  max-width: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
