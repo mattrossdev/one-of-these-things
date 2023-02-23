@@ -33,32 +33,50 @@ body {
   font-family: "Inter", "Helvetica";
 }
 
-.title {
-  margin: auto;
-  font-size: 32px;
-  text-align: center;
-}
-
 .topnav {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
   padding: 0px;
-  height: 40px;
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid #d3d6da;
+  border-top: none;
+}
+
+.title {
+  font-size: 28px;
+  flex-grow: 2;
+  text-align: center;
+  margin-left: 10%;
 }
 
 .topnav > button {
   border: none;
   background-color: #ffffff;
+  display: flex;
+  float: right;
+}
+
+.navicons {
+  display: flex;
+  width: 10%;
 }
 
 .navicons > button {
   border: none;
   background-color: #ffffff;
+  display: flex;
 }
 
 .navicons > button > img {
-  height: 40px;
+  height: 30px;
   background-color: #ffffff;
+  display: flex;
 }
 
 #gameText {
@@ -78,7 +96,8 @@ body {
 }
 
 .center-block {
-  width: 50%;
+  width: 100%;
+  max-width: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -88,6 +107,7 @@ body {
   width: 100%;
   margin: auto;
   height: 200px;
+  --bs-gutter-x: 0;
 }
 
 .row > img {
