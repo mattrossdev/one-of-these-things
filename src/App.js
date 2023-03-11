@@ -15,7 +15,7 @@ function App() {
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
   const [gameTime, setGameTime] = useState(0);
-  const [failed, setFailed] = useState(false);
+
   const [gameWon, setGameWon] = useState(false);
   const [animalNamePair, setAnimalNamePair] = useState({
     first: "",
@@ -139,7 +139,7 @@ function App() {
       setGameTime(returnTime());
       resetTimer();
     }
-  }, [gameCount, failed]);
+  }, [gameCount]);
 
   const determineSuccess = (e) => {
     stopTimer();
@@ -147,7 +147,6 @@ function App() {
       setGameCount(gameCount + 1);
     } else {
       setGameCount(1);
-      setFailed(true);
       alert("incorrect");
       resetTimer();
     }
