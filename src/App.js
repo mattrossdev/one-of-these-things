@@ -99,21 +99,16 @@ function App() {
   };
 
   const startGame = () => {
-    for (let i = 0; i < 6; i++) {
-      document.getElementById("image" + i).src = "" + imageLinks[i] + "";
-    }
     setGameReady(false);
     setGameWon(false);
+    var images = document.getElementById("image-grid").querySelectorAll("img");
+    images.forEach((image) => (image.style.visibility = "visible"));
     startTimer();
   };
 
   const resetImages = () => {
-    document.getElementById("image0").src = "";
-    document.getElementById("image1").src = "";
-    document.getElementById("image2").src = "";
-    document.getElementById("image3").src = "";
-    document.getElementById("image4").src = "";
-    document.getElementById("image5").src = "";
+    var images = document.getElementById("image-grid").querySelectorAll("img");
+    images.forEach((image) => (image.style.visibility = "hidden"));
   };
 
   useEffect(() => {
@@ -128,6 +123,9 @@ function App() {
 
   useEffect(() => {
     if (!isMount) {
+      for (let i = 0; i < 6; i++) {
+        document.getElementById("image" + i).src = "" + imageLinks[i] + "";
+      }
       setGameReady(true);
     }
   }, [imageLinks]);
@@ -189,43 +187,50 @@ function App() {
           <span id="tens">00</span>
         </div>
         <br></br>
-        <div className="center-block">
-          <div className="row">
-            <img
-              src=""
-              id="image0"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img src="" id="image1" onClick={determineSuccess}></img>
-          </div>
-          <div className="row">
-            <img
-              src=""
-              id="image2"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img
-              src=""
-              id="image3"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-          </div>
-          <div className="row">
-            <img
-              src=""
-              id="image4"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img
-              src=""
-              id="image5"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
+        <div id="image-grid">
+          <div className="center-block">
+            <div className="row">
+              <img
+                src=""
+                id="image0"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image1"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
+            <div className="row">
+              <img
+                src=""
+                id="image2"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image3"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
+            <div className="row">
+              <img
+                src=""
+                id="image4"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image5"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
           </div>
         </div>
       </div>
