@@ -15,7 +15,6 @@ function App() {
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
   const [gameTime, setGameTime] = useState(0);
-  const [failed, setFailed] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [animalNamePair, setAnimalNamePair] = useState({
     first: "",
@@ -26,7 +25,6 @@ function App() {
 
   const handleHelpModalShow = () => {
     setShowHelpModal(true);
-    console.log(showHelpModal);
   };
 
   const handleHelpModalHide = () => {
@@ -99,21 +97,16 @@ function App() {
   };
 
   const startGame = () => {
-    for (let i = 0; i < 6; i++) {
-      document.getElementById("image" + i).src = "" + imageLinks[i] + "";
-    }
     setGameReady(false);
     setGameWon(false);
+    var images = document.getElementById("image-grid").querySelectorAll("img");
+    images.forEach((image) => (image.style.visibility = "visible"));
     startTimer();
   };
 
   const resetImages = () => {
-    document.getElementById("image0").src = "";
-    document.getElementById("image1").src = "";
-    document.getElementById("image2").src = "";
-    document.getElementById("image3").src = "";
-    document.getElementById("image4").src = "";
-    document.getElementById("image5").src = "";
+    var images = document.getElementById("image-grid").querySelectorAll("img");
+    images.forEach((image) => (image.style.visibility = "hidden"));
   };
 
   useEffect(() => {
@@ -128,6 +121,9 @@ function App() {
 
   useEffect(() => {
     if (!isMount) {
+      for (let i = 0; i < 6; i++) {
+        document.getElementById("image" + i).src = "" + imageLinks[i] + "";
+      }
       setGameReady(true);
     }
   }, [imageLinks]);
@@ -141,7 +137,7 @@ function App() {
       setGameTime(returnTime());
       resetTimer();
     }
-  }, [gameCount, failed]);
+  }, [gameCount]);
 
   const determineSuccess = (e) => {
     stopTimer();
@@ -149,7 +145,6 @@ function App() {
       setGameCount(gameCount + 1);
     } else {
       setGameCount(1);
-      setFailed(true);
       alert("incorrect");
       resetTimer();
     }
@@ -160,10 +155,8 @@ function App() {
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
-      document.getElementbyId("btn-close").className = "btn-close-white";
     } else {
       setTheme("light");
-      document.getElementbyId("btn-close").className = "btn-close";
     }
   };
 
@@ -189,43 +182,50 @@ function App() {
           <span id="tens">00</span>
         </div>
         <br></br>
-        <div className="center-block">
-          <div className="row">
-            <img
-              src=""
-              id="image0"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img src="" id="image1" onClick={determineSuccess}></img>
-          </div>
-          <div className="row">
-            <img
-              src=""
-              id="image2"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img
-              src=""
-              id="image3"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-          </div>
-          <div className="row">
-            <img
-              src=""
-              id="image4"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
-            <img
-              src=""
-              id="image5"
-              className="imageBox"
-              onClick={determineSuccess}
-            ></img>
+        <div id="image-grid">
+          <div className="center-block">
+            <div className="row">
+              <img
+                src=""
+                id="image0"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image1"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
+            <div className="row">
+              <img
+                src=""
+                id="image2"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image3"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
+            <div className="row">
+              <img
+                src=""
+                id="image4"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+              <img
+                src=""
+                id="image5"
+                className="imageBox"
+                onClick={determineSuccess}
+              ></img>
+            </div>
           </div>
         </div>
       </div>
