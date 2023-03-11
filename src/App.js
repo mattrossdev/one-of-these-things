@@ -15,7 +15,6 @@ function App() {
   const [imageLinks, setImageLinks] = useState([]);
   const [gameReady, setGameReady] = useState(false);
   const [gameTime, setGameTime] = useState(0);
-
   const [gameWon, setGameWon] = useState(false);
   const [animalNamePair, setAnimalNamePair] = useState({
     first: "",
@@ -26,7 +25,6 @@ function App() {
 
   const handleHelpModalShow = () => {
     setShowHelpModal(true);
-    console.log(showHelpModal);
   };
 
   const handleHelpModalHide = () => {
@@ -157,10 +155,8 @@ function App() {
   const toggleTheme = () => {
     if (theme === "light") {
       setTheme("dark");
-      document.getElementbyId("btn-close").className = "btn-close-white";
     } else {
       setTheme("light");
-      document.getElementbyId("btn-close").className = "btn-close";
     }
   };
 
