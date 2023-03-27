@@ -71,7 +71,7 @@ body {
 
 .topnav > button {
   border: none;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   display: flex;
   float: right;
 }
@@ -84,13 +84,13 @@ body {
 
 .navicons > button {
   border: none;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   display: flex;
 }
 
 .navicons > button > img {
   height: 30px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   display: flex;
 }
 

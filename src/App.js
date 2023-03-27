@@ -166,7 +166,11 @@ function App() {
 
   return (
     <div className="app">
-      <TopNav showModal={handleHelpModalShow} toggleTheme={toggleTheme} />
+      <TopNav
+        showModal={handleHelpModalShow}
+        toggleTheme={toggleTheme}
+        theme={theme}
+      />
       <HelpModal show={showHelpModal} handleClose={handleHelpModalHide} />
       {gameWon && <WinModal time={gameTime} />}
       <div className="component">
