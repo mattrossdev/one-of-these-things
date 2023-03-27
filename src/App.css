@@ -92,6 +92,7 @@ body {
   height: 30px;
   background-color: var(--background-color);
   display: flex;
+  padding: 0px;
 }
 
 #gameText {
