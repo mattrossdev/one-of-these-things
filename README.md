@@ -1,6 +1,6 @@
 # One of These Things
 
-This is a portfolio project I built to get more familiar with making API requests and React Applications. 
+This is a portfolio project I built to get more familiar with making API requests and React. 
 
 ## About 
 
