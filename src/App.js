@@ -3,9 +3,9 @@ import { animalNames } from "./data.js";
 import { shuffle } from "./utils.js";
 import { useIsMount } from "./utils.js";
 import { startTimer, stopTimer, resetTimer, returnTime } from "./stopwatch.js";
-import TopNav from "./top-nav.js";
-import HelpModal from "./help-modal.js";
-import WinModal from "./win-modal.js";
+import TopNav from "./components/top-nav.js";
+import HelpModal from "./components/help-modal.js";
+import WinModal from "./components/win-modal.js";
 import "./App.css";
 
 function App() {

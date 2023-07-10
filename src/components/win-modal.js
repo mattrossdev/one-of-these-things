@@ -1,9 +1,7 @@
 import React, { useState, useEffect, render } from "react";
 import Modal from "react-bootstrap/Modal";
-import ModalBody from "react-bootstrap/ModalBody";
-import ModalHeader from "react-bootstrap/ModalHeader";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
+import "../App.css";
 
 export default function WinModal(props) {
   const [open, setOpen] = useState(true);
