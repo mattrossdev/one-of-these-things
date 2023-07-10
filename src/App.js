@@ -80,7 +80,7 @@ function App() {
       alert("Error fetching data, please refresh the page");
     } else {
       for (let i = 0; i < 5; i++) {
-        imageArray.push("" + majorityAnimalResult[i].urls.regular + "");
+        imageArray.push(majorityAnimalResult[i].urls.regular);
       }
     }
 
@@ -96,7 +96,7 @@ function App() {
     if (minorityAnimalResult === null) {
       alert("Error fetching data, please refresh the page");
     } else {
-      imageArray.push("" + minorityAnimalImageLink + "");
+      imageArray.push(minorityAnimalImageLink);
       console.log(imageArray);
       setTarget(minorityAnimalImageLink);
       shuffle(imageArray);
