@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/one-of-these-things/static/css/main.b66883b7.css",
-    "main.js": "/one-of-these-things/static/js/main.15be2ef3.js",
+    "main.css": "/one-of-these-things/static/css/main.b3894f6f.css",
+    "main.js": "/one-of-these-things/static/js/main.876aa762.js",
     "static/js/787.3e45aa33.chunk.js": "/one-of-these-things/static/js/787.3e45aa33.chunk.js",
     "static/media/questiondark.png": "/one-of-these-things/static/media/questiondark.02a5fdb8c5df67c56ab4.png",
     "static/media/darkmodedark.png": "/one-of-these-things/static/media/darkmodedark.906e4955a4d012652511.png",
     "static/media/darkmodelight.png": "/one-of-these-things/static/media/darkmodelight.3239c8c22dc37d7337d2.png",
     "static/media/questionlight.png": "/one-of-these-things/static/media/questionlight.38dc43171b5040345a00.png",
     "index.html": "/one-of-these-things/index.html",
-    "main.b66883b7.css.map": "/one-of-these-things/static/css/main.b66883b7.css.map",
-    "main.15be2ef3.js.map": "/one-of-these-things/static/js/main.15be2ef3.js.map",
+    "main.b3894f6f.css.map": "/one-of-these-things/static/css/main.b3894f6f.css.map",
+    "main.876aa762.js.map": "/one-of-these-things/static/js/main.876aa762.js.map",
     "787.3e45aa33.chunk.js.map": "/one-of-these-things/static/js/787.3e45aa33.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b66883b7.css",
-    "static/js/main.15be2ef3.js"
+    "static/css/main.b3894f6f.css",
+    "static/js/main.876aa762.js"
   ]
 }
