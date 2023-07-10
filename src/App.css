@@ -111,27 +111,37 @@ body {
   font-weight: bold;
 }
 
-.center-block {
+/* .center-block {
   width: 100%;
   max-width: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
+}*/
 
-.row {
+/* .row {
   width: 100%;
   margin: auto;
   height: 200px;
   --bs-gutter-x: 0;
-}
+} */
 
-.row > img {
+/* .row > img {
   width: 50%;
   height: 100%;
   object-fit: cover;
   --bs-gutter-x: 0;
   visibility: hidden;
+} */
+
+.max-height-200-wrapper {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 @keyframes fadeOut {

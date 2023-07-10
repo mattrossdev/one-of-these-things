@@ -9,11 +9,19 @@ import WinModal from "./win-modal.js";
 import "./App.css";
 
 function App() {
+  //Hooks
+  const isMount = useIsMount();
+
+  //Styling state
   const [theme, setTheme] = useState("light");
+
+  //Game state
   const [showHelpModal, setShowHelpModal] = useState(true);
   const [gameCount, setGameCount] = useState(1);
   const [imageLinks, setImageLinks] = useState([]);
+  const [numberLoadedImages, setNumberLoadedImages] = useState(0);
   const [gameReady, setGameReady] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [gameTime, setGameTime] = useState(0);
   const [gameWon, setGameWon] = useState(false);
   const [animalNamePair, setAnimalNamePair] = useState({
@@ -21,7 +29,6 @@ function App() {
     second: "",
   });
   const [target, setTarget] = useState("");
-  const isMount = useIsMount();
 
   const handleHelpModalShow = () => {
     setShowHelpModal(true);
@@ -90,23 +97,11 @@ function App() {
       alert("Error fetching data, please refresh the page");
     } else {
       imageArray.push("" + minorityAnimalImageLink + "");
+      console.log(imageArray);
       setTarget(minorityAnimalImageLink);
       shuffle(imageArray);
       setImageLinks(imageArray);
     }
-  };
-
-  const startGame = () => {
-    setGameReady(false);
-    setGameWon(false);
-    var images = document.getElementById("image-grid").querySelectorAll("img");
-    images.forEach((image) => (image.style.visibility = "visible"));
-    startTimer();
-  };
-
-  const resetImages = () => {
-    var images = document.getElementById("image-grid").querySelectorAll("img");
-    images.forEach((image) => (image.style.visibility = "hidden"));
   };
 
   useEffect(() => {
@@ -120,17 +115,12 @@ function App() {
   }, [animalNamePair]);
 
   useEffect(() => {
-    if (!isMount) {
-      for (let i = 0; i < 6; i++) {
-        document.getElementById("image" + i).src = "" + imageLinks[i] + "";
-      }
+    if (numberLoadedImages === 6) {
       setGameReady(true);
     }
-  }, [imageLinks]);
+  }, [numberLoadedImages]);
 
   useEffect(() => {
-    document.getElementById("gameCounter").innerHTML =
-      "Level:  " + gameCount + " / 3";
     if (gameCount > 3) {
       setGameWon(true);
       setGameCount(1);
@@ -139,8 +129,21 @@ function App() {
     }
   }, [gameCount]);
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const startGame = () => {
+    setGameReady(false);
+    setGameWon(false);
+    setIsPlaying(true);
+    setNumberLoadedImages(0);
+    startTimer();
+  };
+
   const determineSuccess = (e) => {
     stopTimer();
+    setIsPlaying(false);
     if (e.target.src === target) {
       setGameCount(gameCount + 1);
     } else {
@@ -148,8 +151,13 @@ function App() {
       alert("incorrect");
       resetTimer();
     }
-    resetImages();
     getNames();
+  };
+
+  const handleImageLoad = () => {
+    setNumberLoadedImages(
+      (prevNumberLoadedImages) => prevNumberLoadedImages + 1
+    );
   };
 
   const toggleTheme = () => {
@@ -159,10 +167,6 @@ function App() {
       setTheme("light");
     }
   };
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
 
   return (
     <div className="app">
@@ -175,7 +179,7 @@ function App() {
       {gameWon && <WinModal time={gameTime} />}
       <div className="component">
         <div id="gameText">
-          <div id="gameCounter"></div>
+          <div id="gameCounter">Level {gameCount} / 3</div>
           <button className="button" onClick={startGame} disabled={!gameReady}>
             {" "}
             Ready{" "}
@@ -187,48 +191,29 @@ function App() {
         </div>
         <br></br>
         <div id="image-grid">
-          <div className="center-block">
-            <div className="row">
-              <img
-                src=""
-                id="image0"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
-              <img
-                src=""
-                id="image1"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
-            </div>
-            <div className="row">
-              <img
-                src=""
-                id="image2"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
-              <img
-                src=""
-                id="image3"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
-            </div>
-            <div className="row">
-              <img
-                src=""
-                id="image4"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
-              <img
-                src=""
-                id="image5"
-                className="imageBox"
-                onClick={determineSuccess}
-              ></img>
+          <div className="container" style={{ maxWidth: "800px" }}>
+            <div className="row no-gutters">
+              {imageLinks.map((link, index) => (
+                <div key={index} className="col-6 px-0">
+                  <div
+                    className={`max-height-200-wrapper" ${
+                      isPlaying ? "" : "d-none"
+                    }`}
+                  >
+                    <img
+                      src={link}
+                      className="img-fluid"
+                      onClick={determineSuccess}
+                      onLoad={handleImageLoad}
+                      style={{
+                        height: "200px",
+                        objectFit: "cover",
+                        width: "100%",
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
